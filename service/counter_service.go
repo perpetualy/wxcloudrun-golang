@@ -64,6 +64,21 @@ func CounterHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(msg)
 }
 
+// MyTestHandler 测试接口
+func MyTestHandler(w http.ResponseWriter, r *http.Request) {
+	res := &JsonResult{}
+
+	res.Data = 666
+
+	msg, err := json.Marshal(res)
+	if err != nil {
+		fmt.Fprint(w, "内部错误")
+		return
+	}
+	w.Header().Set("content-type", "application/json")
+	w.Write(msg)
+}
+
 // modifyCounter 更新计数，自增或者清零
 func modifyCounter(r *http.Request) (int32, error) {
 	action, err := getAction(r)

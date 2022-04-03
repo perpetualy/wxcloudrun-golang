@@ -84,6 +84,9 @@
             onclick="set('clear')"
             >清零</a
           >
+          <a class="btn btn-success btn-lg count-button" style="background: #07C160; border: 0;" onclick="test()"
+          >计数666</a
+        >
         </div>
         <small
           class="text-black-50"
@@ -122,6 +125,17 @@
         data: JSON.stringify({
           action: action,
         }),
+      }).done(function (res) {
+        if (res && res.data !== undefined) {
+          $(".count-number").html(res.data);
+        }
+      });
+    }
+    function test(){
+      $.ajax("/api/mytest", {
+        method: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
       }).done(function (res) {
         if (res && res.data !== undefined) {
           $(".count-number").html(res.data);
